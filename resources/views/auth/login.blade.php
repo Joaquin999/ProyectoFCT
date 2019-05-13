@@ -30,7 +30,7 @@
                       </span>
                   @enderror
               </div>
-
+                <!--
                       @if (Route::has('password.request'))
                       <div class="forgot">
                           <a href="{{ route('password.request') }}">
@@ -38,7 +38,7 @@
                           </a>
                       </div>
                       @endif
-
+              -->
               <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
 
           </form>
