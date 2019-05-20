@@ -14,18 +14,19 @@ class CreateTareasTable extends Migration
     public function up()
     {
         Schema::create('tareas', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('id')->autoIncrement();
             $table->date('marcado');
+            $table->string('descripcion');
+            $table->string('titulo');
+            $table->string('tema');
             $table->integer('marcador');
             $table->date('inicio')->nullable();
             $table->date('final')->nullable();
-            $table->integer('grupo');
             $table->timestamps();
         });
 
         Schema::table('tareas', function($table) {
           $table->foreign('marcador')->references('id')->on('users')->onDelete('cascade');
-          $table->foreign('grupo')->references('id')->on('grupos')->onDelete('cascade');
         });
     }
 

@@ -12,9 +12,21 @@
 */
 
 Route::get('/', function () {
+  if(Route::has('login')){
+    return view('home');
+  }else{
     return view('auth.login');
+  }
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+///////////////////////////////
+////////Rutas de Tareas///////
+////////////////////////////
+
+Route::get('/tasks', function() {
+    return view('tasks');
+});
