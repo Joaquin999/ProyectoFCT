@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\TareasUsuarios;
 use App\User;
+use App\Tareas;
 use Illuminate\Http\Request;
 
 class TareasUsuariosController extends Controller
@@ -16,7 +17,8 @@ class TareasUsuariosController extends Controller
     public function index($user)
     {
         //
-        return $articlesConTags = User::with('tareas')->where('usuario',5)->get();
+        $usuario = User::find($user);
+        return $usuario->tareas()->get();
     }
 
     /**
