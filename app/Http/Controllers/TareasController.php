@@ -94,8 +94,13 @@ class TareasController extends Controller
      * @param  \App\Tareas  $tareas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tareas $tareas)
+    public function destroy(Request $request)
     {
         //
+        try{
+           $tarea = Tareas::find($request->id)->delete();
+         }catch(Exception $e){
+           return 'Esa tarea no existe';
+         }
     }
 }

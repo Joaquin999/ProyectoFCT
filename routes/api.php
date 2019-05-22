@@ -16,5 +16,5 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::resource('/tareas/{usuario?}', 'TareasController', ['parameters'=> ['{usuario?}' => 'user']]);
-//Route::resource('tareas', 'TareasController');
+Route::resource('/tareas', 'TareasController', ['parameters'=> ['{usuario?}' => '{test?}']]);
+Route::delete('/tareas', 'TareasController@destroy');

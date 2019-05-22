@@ -17,10 +17,11 @@
                        v-bind:inicio="dat.inicio"
                        v-bind:final="dat.final"
                       v-bind:marcador="dat.marcador"
-
+                      v-bind:id="dat.id"
                        ></cardtareas>
                     </div>
                   </div><!--/row-->
+                  <test></test>
         </div>
 </div>
 <script src="js/script.js" type="module"></script>
