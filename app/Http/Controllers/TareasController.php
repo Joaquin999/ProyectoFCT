@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tareas;
+use App\User;
 use Illuminate\Http\Request;
 
 class TareasController extends Controller
@@ -12,10 +13,15 @@ class TareasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($user = false)
     {
         //
-        return Tareas::all();
+        if($user){
+          $usuario = User::with('tareas')->find($user);
+          return $usuario['tareas'];
+        }else{
+          return Tareas::all();
+        }
     }
 
     /**
@@ -37,9 +43,13 @@ class TareasController extends Controller
     public function store(Request $request)
     {
         //
-        $tarea = new Tareas;
-        
-        $tarea->objetivo = $request->objetivo;
+        $tarea = new Tareas();
+
+        $tarea->marcado = $request->marcado;
+        $tarea->descripcion = $request->descripcion;
+        $tarea->titulo = $request->titulo;
+        $tarea->tema = $request->tema;
+        $tarea->marcador = $request->marcador;
         $tarea->save();
     }
 

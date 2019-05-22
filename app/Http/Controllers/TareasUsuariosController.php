@@ -17,8 +17,8 @@ class TareasUsuariosController extends Controller
     public function index($user)
     {
         //
-        $usuario = User::find($user);
-        return $usuario->tareas()->get();
+        $usuario = User::with('tareas')->find($user);
+        return $usuario;
     }
 
     /**

@@ -7,6 +7,8 @@ let r;
       r =(resultado);
   });
 
+
+
 setTimeout(function(){
 Vue.component('cardtareas', {
   data: function () {
@@ -26,17 +28,22 @@ Vue.component('cardtareas', {
     {{titulo}}
     </h3>
     <p>
-      {{descripcion}} adsjadkaksljdkajd ak djkas djkajd akld asl
+      {{descripcion.split(" ").slice(0,10).join(" ")}}...
     </p>
   </div>
   <div class="container">
     <p><i class="fa fa-unlock"></i><b> Inicio: {{inicio}}</b></p>
     <p><i class="fa fa-lock"></i><b> Final: {{final}}</b></p>
       <p>Marcado por {{marcador}}</p>
+      <p>
+      <button class="btn btn-primary"><i class="fa fa-edit" aria-hidden="true"></i></button>
+      <button class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+      </p>
   </div>
   </div>
   </div>`,
   props:{
+    id:{type:String,required:true},
     titulo:{type:String,required:true  },
     tema:{  type:String,  required:true  },
     descripcion:{type:String,required:true},
@@ -60,7 +67,36 @@ Vue.component('row', {
 var vue = new Vue({
   el:'#app',
   data:{
-    message:r
+    message:r,
+    titulo:null,
+    marcador:null,
+    marcado:null,
+    tema:null,
+    descripcion:null,
+    inicio:null,
+    final:null
+  },
+  methods:{
+    postear: function (url, datos){
+      fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(datos),
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res)
+      .catch(error => console.error('Error:', error))
+      .then(response => console.log('Success:', response));
+    },
+    borrar: function(url,id){
+      fetch(url, {
+          method: 'DELETE',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(id)
+          })
+          .then(res => res.text())
+          .then(res => console.log(res))
+    }
   }
 
 })
