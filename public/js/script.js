@@ -25,7 +25,7 @@ function todo(){
       {{titulo}}
       </h3>
       <p>
-        {{descripcion.split(" ").slice(0,10).join(" ")}}...
+        {{descripcion.split(" ").slice(0,8).join(" ")}}...
       </p>
     </div>
     <div class="container">
@@ -33,8 +33,9 @@ function todo(){
       <p><i class="fa fa-lock"></i><b> Final: {{final}}</b></p>
         <p>Marcado por {{marcador}}</p>
         <p>
-        <button class="btn btn-primary"><i class="fa fa-edit" aria-hidden="true"></i></button>
-        <button class="btn btn-danger" v-on:click="borrar('api/tareas',id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+        <input type="hidden" :value="id"/>
+        <a :href="'tasks/'+id"><button class="btn btn-primary"><i class="fa fa-edit" aria-hidden="true"></i></button></a>
+        <button class="btn btn-danger" @click="borrar('api/tareas',id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
         </p>
     </div>
     </div>
@@ -51,18 +52,26 @@ function todo(){
     },
     methods:{
       borrar: function(url,id){
-        fetch(url, {
-            method: 'DELETE',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({id:id})
-            })
-            .then(res => console.log(res.text()))
-            .then(res => console.log(res.text()))
-      }
+        const index = vue.message.find(function(element) {
+              return element.id == id;
+        });
+
+        let numero = vue.message.indexOf(index)
+        vue.message.splice(numero, 1,
+          {id:0,tema:'',titulo:'',descripcion:'Refresa la página para ver los cambios',inicio:'',final:'',marcador:'nadie'})
+        if(id){
+              fetch(url, {
+                  method: 'DELETE',
+                  headers: {'Content-Type': 'application/json'},
+                  body: JSON.stringify({id:id})
+                  })
+                  .then(res => console.log(res.text()))
+                  .then(res => console.log(res.text()))
+            }
+        }
     }
+
   })
-
-
 
   var vue = new Vue({
     el:'#app',
@@ -74,23 +83,38 @@ function todo(){
       tema:null,
       descripcion:null,
       inicio:null,
-      final:null
+      final:null,
+      modals:[],
+      titulo2:null,
+      marcador2:null,
+      marcado2:null,
+      tema2:null,
+      descripcion2:null,
+      inicio2:null,
+      final2:null,
+      categoria:false
     },
     methods:{
       postear: function (url, datos){
+        this.message.push({ titulo:datos.titulo,tema:datos.tema,descripcion:datos.descripcion,marcador:datos.marcador,marcado:datos.marcado, inicio:datos.inicio, final:datos.final })
         fetch(url, {
           method: 'POST',
           body: JSON.stringify(datos),
           headers:{
             'Content-Type': 'application/json'
           }
-        }).then(res => res)
+        }).
+        then(function(res){
+          return res;
+        })
         .catch(error => console.error('Error:', error))
-        .then(response => console.log('Success:', response));
+        .then(function(response){
+            console.log('Success:', response);
+        })
       }
     }
 
   })
 
-  
+
 }

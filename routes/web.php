@@ -30,3 +30,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/tasks', function() {
     return view('tasks');
 });
+Route::get('/tasks/{id}', function(){
+  return view('tasksEdit');
+});

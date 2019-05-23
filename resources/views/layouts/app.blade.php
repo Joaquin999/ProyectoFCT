@@ -75,8 +75,15 @@
             </div>
         </nav>
 
-            @yield('content')
 
+            <div class="container mt-5">
+                <div class="row">
+                  @include('layouts.sidebar')
+                    <div class="col-md-10">
+                      @yield('content')
+                    </div>
+              </div>
+          </div>
     </div>
 
     <script src="js/vue.min.js"></script>
