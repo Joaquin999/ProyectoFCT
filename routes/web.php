@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-  if(Route::has('login')){
+  if(Auth::check()){
     return view('home');
   }else{
     return view('auth.login');
@@ -21,15 +21,33 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function() {
+    return view('home');
+})->middleware('auth');
 
+route::get('/noticias/{id}', function(){
+  return view('newsEdit');
+})->middleware('auth');
 ///////////////////////////////
 ////////Rutas de Tareas///////
 ////////////////////////////
 
 Route::get('/tasks', function() {
     return view('tasks');
-});
+})->middleware('auth');
+
 Route::get('/tasks/{id}', function(){
   return view('tasksEdit');
-});
+})->middleware('auth');
+
+///////////////////////////////
+////////Rutas de USuarios/////
+////////////////////////////
+
+Route::get('/users', function() {
+    return view('usuarios.usuarios');
+})->middleware('auth');
+
+Route::get('/calendar', function(){
+    return view('calendar');
+})->middleware('auth');

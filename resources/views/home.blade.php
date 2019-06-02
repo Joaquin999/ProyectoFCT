@@ -1,25 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
-    <div class="row justify-content-center">
-      @include('layouts.sidebar')
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+<h1 class="display-7 text-center">Noticias</h1>
+@include('layouts.modals.formNews')
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+        <div class="row">
+            <noticia v-for="noticia in noticias"
+              v-bind:titulo="noticia.titulo"
+              v-bind:id="noticia.id"
+              v-bind:ambito="noticia.ambito"
+              v-bind:emisor="noticia.emisor"
+              v-bind:fecha="noticia.fecha"
+              v-bind:descripcion="noticia.descripcion"
 
-                    You are logged in!
-                </div>
-            </div>
-        </div>
+             ></noticia>
 
-    </div>
-</div>
+
+
+        </div><!--/row-->
+        <modalshow v-for="objet in vista" v-bind:objeto="objet"></modalshow>
+        <script src="js/news/script.js" type="module"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 @endsection

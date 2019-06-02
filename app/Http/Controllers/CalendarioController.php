@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Calendario;
+use App\User;
 use Illuminate\Http\Request;
 
 class CalendarioController extends Controller
@@ -12,9 +13,11 @@ class CalendarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        //$calendar = User::find($request->id)->calendario;
+        return Calendario::find(1);
     }
 
     /**
@@ -25,6 +28,7 @@ class CalendarioController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -36,6 +40,9 @@ class CalendarioController extends Controller
     public function store(Request $request)
     {
         //
+        $calendario = Calendario::find($request->id);
+        //$calendario->eventos['2019-06-01'] = $request->datos;
+        return $calendario->eventos['$request->fecha'];
     }
 
     /**

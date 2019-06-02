@@ -200,3 +200,198 @@
      padding:0 20px 10px;
  }
  /* Cards de las Tareas ↑↑↑↑↑↑↑↑↑↑↑↑↑*/
+
+ /* Lista de los usuarios ↓↓↓↓↓↓↓↓↓↓↓↓↓*/
+ a:hover,a:focus{
+    text-decoration: none;
+    outline: none;
+}
+#accordion{
+    border: 2px solid #3485ef;
+    border-radius: 20px;
+    overflow: hidden;
+    width:140%;
+}
+#accordion .panel{
+    border: none;
+    border-bottom: 2px solid #3485ef;
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0;
+}
+#accordion .panel:last-child{
+    border-bottom: none;
+}
+#accordion .panel-heading{
+    padding: 0;
+    height:62px;
+}
+#accordion .panel-collapse{
+  background-color: white;
+}
+#accordion .panel-title a{
+    display: block;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    background: #3485ef;
+    text-align: right;
+    border: none;
+    border-radius: 0;
+    position: relative;
+    transition: all 0.3s ease 0s;
+}
+#accordion .panel-title a.collapsed{
+    background: #fff;
+    color: #3485ef;
+}
+#accordion .panel-title a.collapsed:hover{
+    background: #3485ef;
+    color: #fff;
+}
+#accordion .panel-title a:after,
+#accordion .panel-title a.collapsed:after{
+    content: "\f107";
+    font-family: fontawesome;
+    font-size: 25px;
+    color: #fff;
+    position: absolute;
+    top: 17px;
+    left: 20px;
+    transition: all 0.3s ease-in-out 0s;
+}
+#accordion .panel-title a.collapsed:after{
+    content: "\f106";
+    color: #3485ef;
+}
+#accordion .panel-title a.collapsed:hover:after{
+    color: #fff;
+}
+#accordion .panel-body{
+    padding: 20px;
+    border: none;
+    font-size: 14px;
+    color: #888;
+    line-height: 25px;
+}
+
+.list-group-item:hover, a.list-group-item:focus {text-decoration: none;background-color: rgb(245, 245, 245);}
+
+  /* Lista de los usuarios ↑↑↑↑↑↑↑↑↑↑↑↑↑*/
+
+
+  .boton {
+	background-color:#ddfffb;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #000000;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:15px;
+	padding:5px 13px;
+}
+.boton:hover {
+	background-color:#a4fbff;
+}
+.boton:active {
+	position:relative;
+	top:1px;
+}
+
+
+
+
+
+
+
+
+
+.jzdbox1 {
+  width:450px;
+  background:#afecfb;
+  border-radius:5px;
+  overflow:hidden;
+  display:block;
+  margin-bottom:10px;
+  box-shadow:0 0 20px #adadad;
+  margin:0 auto;
+  margin-top:10px;
+}
+
+.jzdcal {
+  padding:0 10px 10px 10px;
+  box-sizing:border-box!important;
+  background:#749d9e;
+  background: -webkit-linear-gradient(#749d9e, #b9f2fc)!important;
+  background: -o-linear-gradient(#749d9e, #b9f2fc)!important;
+  background: -moz-linear-gradient(#749d9e, #b9f2fc)!important;
+  background: linear-gradient(#749d9e, #b3a68b)!important;
+}
+
+.jzdcalt {
+  font:28px 'Roboto';
+  font-weight:700;
+  color:#f7f3eb;
+  display:block;
+  margin:18px 0 0 0;
+  text-transform:uppercase;
+  text-align:center;
+  letter-spacing:1px;
+}
+
+.jzdcal span {
+  font:19px 'Roboto';
+  font-weight:400;
+  color:#000000;
+  text-align:center;
+  width:42px;
+  height:42px;
+  display:inline-block;
+  float:left;
+  overflow:hidden;
+  line-height:40px;
+}
+
+.jzdcal .jzdb:before {
+  opacity:0.3;
+  content:'o';
+  color:#ffffff;
+}
+
+.circle {
+  border:1px solid #f7f3eb;
+  box-sizing:border-box!important;
+  border-radius:200px!important;
+}
+
+span[data-title]:hover:after,
+div[data-title]:hover:after {
+  font:20px 'Roboto';
+  font-weight:400;
+  content:attr(data-title);
+  position:absolute;
+  margin:0 0 100px;
+  background:#282423;
+  border:1px solid #f7f3eb;
+  color:#f7f3eb;
+  padding:5px;
+  z-index:9999;
+  min-width:150px;
+  max-width:150px;
+}
+.containerC{
+  padding-left:65px;
+  padding-right:40px;
+}
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}

@@ -15,6 +15,7 @@ class AsistenciaController extends Controller
     public function index()
     {
         //
+        return Asistencia::all();
     }
 
     /**
@@ -36,6 +37,12 @@ class AsistenciaController extends Controller
     public function store(Request $request)
     {
         //
+        $asistencia = new Asistencia();
+        $asistencia->entrada = $request->entrada;
+        $asistencia->informe = $request->informe ?? null;
+        $asistencia->usuario = $request->usuario;
+        $asistencia->save();
+        return $asistencia->id;
     }
 
     /**
@@ -70,6 +77,11 @@ class AsistenciaController extends Controller
     public function update(Request $request, Asistencia $asistencia)
     {
         //
+        $asistencia = Asistencia::find($request->id);
+        $asistencia->informe = $request->informe ?? null;
+        $asistencia->salida = $request->salida;
+        $asistencia->save();
+        return $request;
     }
 
     /**
@@ -81,5 +93,6 @@ class AsistenciaController extends Controller
     public function destroy(Asistencia $asistencia)
     {
         //
+        return Asistencia::find($request->id)->delete();
     }
 }

@@ -3,10 +3,6 @@
   Agregar nueva Tarea  &nbsp;
   <i class="fa fa-plus" style="color:white"></i>
 </button>
-<select v-model="categoria">
-  <option value="false" default>Ninguno</option>
-<option v-for="cat in message" :value="cat.tema">@{{cat.tema}}</option>
-</select>
 </p>
 
 <div class="modal fade" id="TaskModal" tabindex="-1" role="dialog" aria-labelledby="TaskModalCenterTitle" aria-hidden="true">

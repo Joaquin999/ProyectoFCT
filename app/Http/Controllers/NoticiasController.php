@@ -2,26 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Tareas;
-use App\User;
+use App\Noticias;
 use Illuminate\Http\Request;
 
-class TareasController extends Controller
+class NoticiasController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($user = false)
+    public function index()
     {
         //
-        if($user){
-          $usuario = User::with('tareas')->find($user);
-          return $usuario['tareas'];
-        }else{
-          return Tareas::all();
-        }
+        return Noticias::all();
     }
 
     /**
@@ -43,35 +37,36 @@ class TareasController extends Controller
     public function store(Request $request)
     {
         //
-        $tarea = new Tareas();
-
-        $tarea->marcado = $request->marcado;
-        $tarea->descripcion = $request->descripcion;
-        $tarea->titulo = $request->titulo;
-        $tarea->tema = $request->tema;
-        $tarea->marcador = $request->marcador;
-        $tarea->save();
+        $noticias = new Noticias();
+        $noticias->titulo = $request->titulo;
+        $noticias->descripcion = $request->descripcion;
+        $noticias->fecha = $request->fecha;
+        $noticias->emisor = $request->emisor;
+        $noticias->ambito = $request->ambito;
+        $noticias->imagen = $request->imagen ?? null;
+        $noticias->save();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Tareas  $tareas
+     * @param  \App\Noticias  $noticias
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //
-        return Tareas::findOrFail($id);
+        return Noticias::findOrFail($id);
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Tareas  $tareas
+     * @param  \App\Noticias  $noticias
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tareas $tareas)
+    public function edit(Noticias $noticias)
     {
         //
     }
@@ -80,37 +75,36 @@ class TareasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tareas  $tareas
+     * @param  \App\Noticias  $noticias
      * @return \Illuminate\Http\Response
      */
-    public function update($id,Request $request, Tareas $tareas)
+    public function update($id, Request $request)
     {
         //
-        $tarea = Tareas::find($id);
-        $tarea->marcado = $request->marcado;
-        $tarea->descripcion = $request->descripcion;
-        $tarea->titulo = $request->titulo;
-        $tarea->tema = $request->tema;
-        $tarea->marcador = $request->marcador;
-        $tarea->inicio = $request->inicio;
-        $tarea->final = $request->final;
-        $tarea->save();
-
+        $noticia = Noticias::find($id);
+        $noticia->fecha = $request->fecha;
+        $noticia->descripcion = $request->descripcion;
+        $noticia->titulo = $request->titulo;
+        $noticia->emisor = $request->emisor;
+        $noticia->imagen = $request->imagen;
+        $noticia->ambito = $request->ambito ?? null;
+        $noticia->save();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Tareas  $tareas
+     * @param  \App\Noticias  $noticias
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
     {
         //
+
         try{
-           $tarea = Tareas::find($request->id)->delete();
+          $noticia = Noticias::find($request->id)->delete();
          }catch(Exception $e){
-           return 'Esa tarea no existe';
+           return $request->id;
          }
     }
 }
