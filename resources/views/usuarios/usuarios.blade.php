@@ -6,7 +6,7 @@
         <div class="row">
 
                       <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                        <panel v-for="grupo in grupos" v-if="grupos.length!=0 & users.length!=0 & grupos_users.length!=0"
+                        <panel v-for="grupo in grupos" 
                           v-bind:grupo="grupo"
                           v-bind:usuarios="users"
                           v-bind:grupos_users="grupos_users"

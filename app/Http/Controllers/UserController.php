@@ -44,9 +44,7 @@ class UserController extends Controller
         //
         if(count(User::where('name', $request->name)->get())){
           $user = User::where('name', $request->name)->get()[0];
-          $multiple = true;
         }else{
-          $multiple = false;
           $user = new User();
           $user->name = $request->name;
           $user->email = $request->email;
@@ -63,9 +61,7 @@ class UserController extends Controller
           $grupo_user->save();
 
         }
-        if($multiple){
 
-        }
         return $user->id;
 
     }

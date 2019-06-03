@@ -77,6 +77,12 @@ class GruposController extends Controller
     public function update(Request $request, Grupos $grupos)
     {
         //
+        $grupo = Grupos::find($request->id);
+        $grupo->nombre = $request->nombre;
+        $grupo->ambito = $request->ambito;
+        $grupo->calendario = $request->calendario;
+        $grupo->save();
+        return $grupo->id;
     }
 
     /**
@@ -85,9 +91,10 @@ class GruposController extends Controller
      * @param  \App\Grupos  $grupos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Grupos $grupos)
+    public function destroy(Request $request)
     {
         //
-        return Grupos::find($request->id)->delete();
+        Grupos::find($request->id)->delete();
+        return 'okay';
     }
 }

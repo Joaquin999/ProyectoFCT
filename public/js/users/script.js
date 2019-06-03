@@ -176,6 +176,8 @@ var vue = new Vue({
           }else{
             vue.grupos.push(...resultado.data)
           }
+          console.log(vue.grupos)
+
         })
         .catch(error => console.log('Error:', error))
     },
@@ -209,29 +211,25 @@ var vue = new Vue({
     },
     setEditando(valor){
       vue.editando = valor;
+
     },
     obtenerSinGrupos(){
       let lista = []
-      if(this.grupos.length!=0 & this.users.length!=0){
 
-        let tmpUsers = []
+      let tmpUsers = []
 
-        for(let value of this.grupos_users){
-          tmpUsers.push(value.usuario);
-        }
+      for(let value of this.grupos_users){
+        tmpUsers.push(value.usuario);
+      }
 
-        for(let user of this.users){
+      for(let user of this.users){
 
-          if(tmpUsers.indexOf(user.id)==-1){
-            lista.push(user)
-          }
+        if(tmpUsers.indexOf(user.id)==-1){
+          lista.push(user)
         }
       }
-      if(this.sin_grupos.length){
-        this.sin_grupos.splice(0,this.sin_grupos.length,...lista)
-      }else{
-        this.sin_grupos.push(...lista)
-      }
+
+      this.sin_grupos = lista
     },
     eliminar(id){
       if(id){
@@ -246,7 +244,7 @@ var vue = new Vue({
       }
     },
     editar(objeto){
-      axios.put('api/tareas/1', objeto)
+      axios.put('api/usuarios/1', objeto)
       .then(function(response){
         console.log(response)
         vue.obtenerUsers()
@@ -257,6 +255,14 @@ var vue = new Vue({
     }
 
 
+  },
+  watch:{
+    users: function(ov, nv){
+      vue.obtenerSinGrupos()
+    },
+    grupos:function(ov, nv){
+      vue.obtenerSinGrupos()
+    }
   }
 
 })
