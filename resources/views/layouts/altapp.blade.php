@@ -24,7 +24,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body id="LoginForm">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="margin-left:15%">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                   @guest

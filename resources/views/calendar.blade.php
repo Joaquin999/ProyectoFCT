@@ -44,6 +44,21 @@
         <calendario v-if="datos.length!=0" v-bind:eventos="datos.eventos"></calendario>
 
 
+        <div v-if="seleccionado">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">@{{seleccionado.nombre}}</h5>
+                <ul class="list-group">
+                <li class="list-group-item" v-if="name!='nombre'" v-for="(value, name, index) in seleccionado">@{{name}} : @{{value}}</li>
+                </ul>
+                <br/>
+                <a class="btn btn-primary" @click="setSeleccionado(null)">Cerrar</a>
+            </div>
+          </div>
+        </div>
+
+
+
         </div><!--/row-->
         <script src="js/calendar/script.js" type="module"></script>
 

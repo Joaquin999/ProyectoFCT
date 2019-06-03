@@ -1,4 +1,6 @@
 <?php
+use App\Calendario;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,4 +52,9 @@ Route::get('/users', function() {
 
 Route::get('/calendar', function(){
     return view('calendar');
+})->middleware('auth');
+
+
+Route::get('/groups', function(){
+    return view('groups');
 })->middleware('auth');

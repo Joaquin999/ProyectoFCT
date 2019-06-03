@@ -6,8 +6,9 @@ Vue.component('calendario', {
       mes:'Junio',
       mesNum:'06',
       año:'2019',
-      setEvento:vue.setEvento()
-    }
+      setEvento:vue.setEvento,
+      setSeleccionado:vue.setSeleccionado
+      }
 
   },
   template: `<div class="jzdbox1 jzdbasf jzdcal">
@@ -29,8 +30,7 @@ Vue.component('calendario', {
 <span class="jzdb"><!--BLANK--></span>
 
 <div v-for="dia in dias">
-
-<span v-if="comprobar(dia)"  class="circle" :data-title="getEvento(dia).nombre">{{dia}}</span>
+<span v-if="comprobar(dia)"  @click="setSeleccionado(getEvento(dia),dia)" class="circle" :data-title="getEvento(dia).nombre">{{dia}}</span>
 <span v-else>{{dia}}</span>
 </div>
 
@@ -48,25 +48,8 @@ Vue.component('calendario', {
 </div> `,
   props:{
     eventos:{type:Object}
-
-
   },
   methods:{
-    borrar: function(url,id){
-      if(id){
-        axios.delete(url, {data:{id:id}})
-        .then(function(response){
-            for(let i = 0;i<vue.noticias.length;i++){
-              if(vue.noticias[i].id == id){
-                vue.noticias.splice(i,1)
-              }
-            }
-            console.log(response)
-        })
-        .catch(error => console.log('Error:', error))
-      }
-
-    },
     comprobar(dia){
       let cadena = `${this.año}-${this.mesNum}-${dia}`
       if(cadena in JSON.parse(this.eventos)){
@@ -92,19 +75,24 @@ var vue = new Vue({
     nombre:'',
     fecha:'',
     campos:['nombre','fecha'],
-    valores:{nombre:'test',fecha:'2019-00-00'},
+    valores:{nombre:'Nombre',fecha:'2019-00-00'},
     nuevo:'',
-    idCalendario:''
+    idCalendario:'',
+    seleccionado:false
   },
   methods:{
     postear: function (objeto){
       let fecha = objeto.fecha
       delete objeto.fecha
-      let cadena = {datos:objeto,id:vue.idCalendario,fecha}
-      axios.post('api/calendario', cadena)
+      let datostmp = JSON.parse(vue.datos.eventos)
+      datostmp[fecha] = objeto
+      datostmp = {"datos":datostmp}
+
+      console.log(datostmp)
+      axios.post('api/calendario', datostmp)
       .then(function (response) {
         console.log(response.data);
-        vue.obtenerDatos();
+        vue.obtenerDatos()
       })
       .catch(function (error) {
         console.log(error);
@@ -121,6 +109,9 @@ var vue = new Vue({
     setEvento(objeto){
       vue.evento = objeto
       vue.show = true
+    },
+    setSeleccionado(valor){
+      vue.seleccionado = valor
     }
 
   }

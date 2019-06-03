@@ -33,3 +33,8 @@ Route::delete('/asistencias', 'AsistenciaController@destroy');
 
 Route::resource('/calendario', 'CalendarioController', ['parameters'=> ['id?}' => '{id?}']]);
 Route::delete('/calendario', 'CalendarioController@destroy');
+
+Route::resource('/grupos-usuario', 'GruposUsersController', ['parameters'=> ['id?}' => '{id?}']]);
+
+Route::resource('/grupos', 'GruposController', ['parameters'=> ['id?}' => '{id?}']]);
+Route::delete('/grupos', 'GruposController@destroy');

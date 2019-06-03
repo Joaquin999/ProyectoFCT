@@ -37,6 +37,12 @@ class GruposController extends Controller
     public function store(Request $request)
     {
         //
+        $grupo = new Grupos();
+        $grupo->nombre = $request->nombre;
+        $grupo->ambito = $request->ambito;
+        $grupo->calendario = $request->calendario;
+        $grupo->save();
+        return $grupo->id;
     }
 
     /**
@@ -82,5 +88,6 @@ class GruposController extends Controller
     public function destroy(Grupos $grupos)
     {
         //
+        return Grupos::find($request->id)->delete();
     }
 }

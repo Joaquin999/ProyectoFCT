@@ -40,9 +40,10 @@ class CalendarioController extends Controller
     public function store(Request $request)
     {
         //
-        $calendario = Calendario::find($request->id);
-        //$calendario->eventos['2019-06-01'] = $request->datos;
-        return $calendario->eventos['$request->fecha'];
+        $calendario = Calendario::find(1);
+        $calendario->eventos = json_encode($request->datos);
+        $calendario->save();
+        return $calendario->eventos;
     }
 
     /**
